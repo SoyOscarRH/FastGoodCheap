@@ -19,26 +19,41 @@
     </head>
 
     <style>
-        .switch {
-            --uiSwitchSize: var(--switchSize, 64px);
-            --uiSwitchBgColor: var(--switchBgColor, #f1f1f1);
-            --uiSwitchBgColorActive: var(--switchBgColorActive, #4ed164);
-            --uiSwitchBorderColorActive: var(--switchBorderColorActive, #fff);
-            --uiSwitchButtonBgColor: var(--switchButtonBgColor, #fff);  
-            
+
+        /* Definition of the main component */
+        .toggle {
+            --uitoggleSize: var(--toggleSize, 100px);
+            --uitoggleBgColor: var(--toggleBgColor, #ebebeb);
+            --uitoggleBgColorActive: var(--toggleBgColorActive, #4ed164);
+            --uitoggleButtonBgColor: var(--toggleButtonBgColor, #fff);  
+            --uitoggleIndent: var(--toggleIndent, 8px);
+            --uitoggleBorderRadius: var(--toggleBorderRadius, 60px);
+            --uitoggleTimeMove: var(--toggleTimeMove, 0.8s);
+            --uitoggleTimeMove1: calc((var(--uitoggleTimeMove) / 4));
+            --uitoggleTimeMove2: calc((var(--uitoggleTimeMove) / 8));
+            --uitoggleSizeHalf: calc((var(--uitoggleSize) / 2));
+            --uitoggleIndentDouble: calc(var(--uitoggleIndent) * 2);
+
             display: inline-block;
             position: relative;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
+
+            width: var(--uitoggleSize);
+            height: var(--uitoggleSizeHalf);
+            border-radius: var(--uitoggleBorderRadius);    
+            background-color: var(--uitoggleBgColorActive);
         }
 
-        .switch__label{
+        /* Basic Style */
+
+        .toggleLabel {
             display: block;
             width: 100%;
             height: 100%;
         }
 
-        .switch__toggle{
+        .toggleInput {
             width: 0;
             height: 0;
             opacity: 0;
@@ -48,78 +63,74 @@
             left: 0;
         }
 
-        .switch__label:before, .switch__label:after{
+        .toggleLabel:before, .toggleLabel:after {
             content: "";
             cursor: pointer;
-
             position: absolute;
             top: 0;
             left: 0;
         }
 
-        .switch__label:before{
+        .toggle .toggleLabel {
+            border-radius: var(--uitoggleBorderRadius);    
+        }
+
+        /* How things look like not checked */
+        .toggleLabel:before {
             width: 100%;
             height: 100%;
             box-sizing: border-box;
-            background-color: var(--uiSwitchBgColor);
+            background-color: var(--uitoggleBgColor);
         }
 
-        .switch__label:after{
+        /* How things look like checked & transitions */
+        .toggleLabel:after {
             top: 50%;
             z-index: 3;
-            transition: transform .4s cubic-bezier(0.44,-0.12, 0.07, 1.15);
+            transition: transform var(--uitoggleTimeMove) cubic-bezier(0.44, -0.12, 0.07, 1.15);
         }
 
-        /* type 2 */
-
-        .switch_type2{
-            --uiSwitchIndent: var(--switchIndent, 8px);
-            --uiSwitchBorderRadius: var(--switchBorderRadius, 60px);
-            
-            width: var(--uiSwitchSize);
-            height: calc((var(--uiSwitchSize) / 2));
-            border-radius: var(--uiSwitchBorderRadius);    
-            background-color: var(--uiSwitchBgColorActive);
-        }
-
-        .switch_type2 .switch__label{
-            border-radius: var(--uiSwitchBorderRadius);    
-        }
-
-        .switch_type2 .switch__label:before{
-            border-radius: var(--uiSwitchBorderRadius);    
-            transition: opacity .2s ease-out .1s, transform .2s ease-out .1s;
+        .toggle .toggleLabel:before {
+            border-radius: var(--uitoggleBorderRadius);    
+            transition: 
+                opacity   var(--uitoggleTimeMove1) ease-out var(--uitoggleTimeMove2), 
+                transform var(--uitoggleTimeMove1) ease-out var(--uitoggleTimeMove2);
             transform: scale(1);
             opacity: 1;  
         }
 
-        .switch_type2 .switch__toggle:checked ~ .switch__label:before{
+        .toggle .toggleInput:checked ~ .toggleLabel:before {
             transform: scale(0);
             opacity: 0;
         }
 
-        .switch_type2 .switch__toggle ~ .switch__label:after{
-            width: calc((var(--uiSwitchSize) / 2) - calc(var(--uiSwitchIndent) * 2));
-            height: calc((var(--uiSwitchSize) / 2) - calc(var(--uiSwitchIndent) * 2));
-            transform: translate3d(var(--uiSwitchIndent), -50%, 0);
+        .toggle .toggleInput ~ .toggleLabel:after {
+            width:  calc(var(--uitoggleSizeHalf) - var(--uitoggleIndentDouble));
+            height: calc(var(--uitoggleSizeHalf) - var(--uitoggleIndentDouble));
+            transform: translate3d(var(--uitoggleIndent), -50%, 0);
             
-            background-color: var(--uiSwitchButtonBgColor);
+            background-color: var(--uitoggleButtonBgColor);
             border-radius: 100%;
         }
 
-        .switch_type2 .switch__toggle:checked ~ .switch__label:after{
-            transform: translate3d(calc(var(--uiSwitchSize) - calc((var(--uiSwitchSize) / 2) - calc(var(--uiSwitchIndent) * 2)) - var(--uiSwitchIndent)), -50%, 0);
+        .toggle .toggleInput:checked ~ .toggleLabel:after {
+            transform: translate3d(
+                calc(
+                    var(--uitoggleSize) - 
+                    calc(var(--uitoggleSizeHalf) - var(--uitoggleIndentDouble)) - 
+                    var(--uitoggleIndent)
+                ), 
+                -50%, 
+                0
+            );
         }
 
-        /* demo styles for switch */
-
-        .switch{
-            --switchSize: 128px;
-            margin-top: 40px;
-        }
-
-        .switch_type2 {
-            --switchBgColorActive: #10854e;
+        /* demo styles for toggle */
+        .toggle {
+            margin: 1rem;
+            --toggleSize: 8rem;
+            --toggleTimeMove: 0.5s;
+            --toggleBgColorActive: #10854e;
         }
 
         body {
@@ -132,9 +143,9 @@
         <div id="ReactApp" />
         <script src="Distribution/bundle.js" type="text/javascript"></script>
 
-        <label class="switch switch_type2" role="switch">
-            <input type="checkbox" class="switch__toggle">
-            <span class="switch__label"/ >
+        <label class="toggle" role="toggle">
+            <input type="checkbox" class="toggleInput">
+            <span class="toggleLabel"/ >
         </label>    
     </body>
 

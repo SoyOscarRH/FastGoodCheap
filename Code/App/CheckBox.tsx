@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from "react"
 import useToggle from "./useToggle"
-import Switch from "react-switch"
+import CheckboxStyle from "./CheckboxStyle.css"
 import Styles from "./Styles.css"
 
 const Checkbox: FunctionComponent<{ isOn: boolean }> = props => {
@@ -12,9 +12,9 @@ const Checkbox: FunctionComponent<{ isOn: boolean }> = props => {
 
   return (
     <div className={Styles.container}>
-      <label className="switch">
-        <input type="checkbox" checked={isOn} />
-        <span className="slider round"></span>
+      <label className={CheckboxStyle.toggle}>
+        <input type="checkbox" checked={isOn} onChange={toggleOn} className={CheckboxStyle.toggleInput} />
+        <span className={CheckboxStyle.toggleLabel} />
       </label>
       {isEditable ? (
         <input

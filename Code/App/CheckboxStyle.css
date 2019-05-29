@@ -1,0 +1,116 @@
+/* Definition of the main component */
+.toggle {
+    --uitoggleSize: var(--toggleSize, 100px);
+    --uitoggleBgColor: var(--toggleBgColor, #ebebeb);
+    --uitoggleBgColorActive: var(--toggleBgColorActive, #4ed164);
+    --uitoggleButtonBgColor: var(--toggleButtonBgColor, #fff);  
+    --uitoggleIndent: var(--toggleIndent, 8px);
+    --uitoggleBorderRadius: var(--toggleBorderRadius, 60px);
+    --uitoggleTimeMove: var(--toggleTimeMove, 0.8s);
+    --uitoggleTimeMove1: calc((var(--uitoggleTimeMove) / 4));
+    --uitoggleTimeMove2: calc((var(--uitoggleTimeMove) / 8));
+    --uitoggleSizeHalf: calc((var(--uitoggleSize) / 2));
+    --uitoggleIndentDouble: calc(var(--uitoggleIndent) * 2);
+
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    width: var(--uitoggleSize);
+    height: var(--uitoggleSizeHalf);
+    border-radius: var(--uitoggleBorderRadius);    
+    background-color: var(--uitoggleBgColorActive);
+}
+
+/* Basic Style */
+
+.toggleLabel {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.toggleInput {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.toggleLabel:before, .toggleLabel:after {
+    content: "";
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.toggle .toggleLabel {
+    border-radius: var(--uitoggleBorderRadius);    
+}
+
+/* How things look like not checked */
+.toggleLabel:before {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: var(--uitoggleBgColor);
+}
+
+/* How things look like checked & transitions */
+.toggleLabel:after {
+    top: 50%;
+    z-index: 3;
+    transition: transform var(--uitoggleTimeMove) cubic-bezier(0.44, -0.12, 0.07, 1.15);
+}
+
+.toggle .toggleLabel:before {
+    border-radius: var(--uitoggleBorderRadius);    
+    transition: 
+        opacity   var(--uitoggleTimeMove1) ease-out var(--uitoggleTimeMove2), 
+        transform var(--uitoggleTimeMove1) ease-out var(--uitoggleTimeMove2);
+    transform: scale(1);
+    opacity: 1;  
+}
+
+.toggle .toggleInput:checked ~ .toggleLabel:before {
+    transform: scale(0);
+    opacity: 0;
+}
+
+.toggle .toggleInput ~ .toggleLabel:after {
+    width:  calc(var(--uitoggleSizeHalf) - var(--uitoggleIndentDouble));
+    height: calc(var(--uitoggleSizeHalf) - var(--uitoggleIndentDouble));
+    transform: translate3d(var(--uitoggleIndent), -50%, 0);
+    
+    background-color: var(--uitoggleButtonBgColor);
+    border-radius: 100%;
+}
+
+.toggle .toggleInput:checked ~ .toggleLabel:after {
+    transform: translate3d(
+        calc(
+            var(--uitoggleSize) - 
+            calc(var(--uitoggleSizeHalf) - var(--uitoggleIndentDouble)) - 
+            var(--uitoggleIndent)
+        ), 
+        -50%, 
+        0
+    );
+}
+
+
+
+/* ====================================================
+===============     DEFAULT STYLE   ===================
+=====================================================*/
+.toggle {
+    margin: 1rem;
+    --toggleSize: 8rem;
+    --toggleTimeMove: 0.5s;
+    --toggleBgColorActive: #10854e;
+}
