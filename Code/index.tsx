@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from "react"
 import ReactDOM from "react-dom"
 
-import Checkbox from "./Checkbox"
+import Option from "./Option"
 
 const App: FunctionComponent = () => (
   <main>
-    <Checkbox isOn />
-    <Checkbox isOn />
-    <Checkbox isOn />
+    <Option isOn />
+    <Option isOn />
+    <Option isOn />
   </main>
 )
 
