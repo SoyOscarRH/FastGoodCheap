@@ -1,0 +1,14 @@
+.container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    background-color: lightyellow;
+    border: 1px solid #bbb;
+    padding: 10px;
+  }
+
+.text {
+    margin: auto; /* Important */ 
+    text-align: center; 
+}
+  
