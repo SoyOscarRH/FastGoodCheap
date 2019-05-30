@@ -1,29 +1,40 @@
-import React, { FunctionComponent, useState, useRef } from "react"
+import React, { FunctionComponent } from "react"
 import ReactDOM from "react-dom"
 
 import Styles from "./Styles.css"
 import Option from "./Option"
 
-const App: FunctionComponent = () => {
-  const [state, setState] = useState([true, true, false])
-  const lastOne = useRef(0)
-  const update = (id: 0 | 1 | 2) => {
-    const newState = [...state]
-    newState[id] = !newState[id]
-    if (newState.every(bit => bit)) {
-      newState[lastOne.current] = false;
-    }
+import useJustTwo from "./useJustTwo"
+import useTexts from "./useTexts"
 
-    lastOne.current = id;
-    setState(newState)
-  }
-  
+const App: FunctionComponent = () => {
+  const [actives, [fun1, fun2, fun3]] = useJustTwo()
+  const [texts, updaters] = useTexts() 
+
   return (
     <main className={Styles.Container}>
       <div />
-      <Option default="Fast"  onClick={() => update(0)} isOn={state[0]} color="Green" />
-      <Option default="Good"  onClick={() => update(1)} isOn={state[1]} color="Blue" />
-      <Option default="Cheap" onClick={() => update(2)} isOn={state[2]} color="Red" />
+      <Option
+        defaultText={texts[0]}
+        onTextChange={updaters[0]}
+        onClick={fun1}
+        isOn={actives[0]}
+        color="Green"
+      />
+      <Option
+        defaultText={texts[1]}
+        onTextChange={updaters[1]}
+        onClick={fun2}
+        isOn={actives[1]}
+        color="Blue"
+      />
+      <Option
+        defaultText={texts[2]}
+        onTextChange={updaters[2]}
+        onClick={fun3}
+        isOn={actives[2]}
+        color="Red"
+      />
       <div />
     </main>
   )

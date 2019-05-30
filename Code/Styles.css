@@ -4,5 +4,5 @@
     display: grid;
     background-color:#F9F9F9;
     grid-template-rows: 1fr auto auto auto 1fr;
-    grid-gap: 2rem;
+    grid-gap: 3rem;
 }
