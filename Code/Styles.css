@@ -3,6 +3,18 @@
     width: 100%;
     display: grid;
     background-color:#F9F9F9;
-    grid-template-rows: 1fr auto auto auto 2fr;
+    grid-template-rows: 1fr auto auto auto 2fr auto;
     grid-gap: 1.5rem;
+}
+
+.Links {
+    margin: 2rem;
+    text-align: end;
+}
+
+
+.Links img {
+    height: 2rem;
+    margin-right: 1.5rem;
+    cursor: pointer;
 }
