@@ -1,46 +1,45 @@
 .Container {
-    font-size: 3.5rem;
-    display: grid;
-    grid-template-columns: 8% auto 1fr 8%;
-    align-content: center;
-    grid-gap: 0.8rem;
-    align-items: center;
+  font-size: 3.5rem;
+  display: grid;
+  grid-template-columns: 5% auto 1fr 5%;
+  align-content: center;
+  grid-gap: 0.8rem;
+  align-items: center;
 }
 
 .Container input[type="text"] {
-    font-size: 7.5vmin;
-    user-select: none;
-    width: 100%;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    outline: 0 none transparent;
-    border: transparent;
-    background-color: #F9F9F9;
+  font-size: 7.5vmin;
+  user-select: none;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  outline: 0 none transparent;
+  border: transparent;
+  background-color: #f9f9f9;
 }
 
 .Container span {
-    font-size: 7.5vmin;
-    user-select: none;
-    width: 100%;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
+  font-size: 7.5vmin;
+  user-select: none;
+  width: 100%;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
 }
 
 @media only screen and (min-width: 600px) {
-    .Container {
-        grid-template-columns: 12% auto 1fr 12%;
-    } 
+  .Container {
+    grid-template-columns: 11% auto 1fr 11%;
+  }
 }
 
 @media only screen and (min-width: 800px) {
-    .Container {
-        grid-template-columns: 18% auto 1fr 18%;
-    } 
+  .Container {
+    grid-template-columns: 16% auto 1fr 16%;
+  }
 }
 
 @media only screen and (min-width: 1200px) {
-    .Container {
-        grid-template-columns: 25% auto 1fr 25%;
-    } 
+  .Container {
+    grid-template-columns: 22% auto 1fr 22%;
+  }
 }
-
