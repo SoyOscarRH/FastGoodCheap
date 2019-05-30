@@ -9,8 +9,7 @@ type CostumeCheckbox = FunctionComponent<{
 }>
 const CostumeCheckbox: CostumeCheckbox = props => {
   // @ts-ignore
-  const color: CSSProperties = {"--toggleBgColorActive": props.color}
-
+  const color: CSSProperties = { "--toggleBgColorActive": props.color }
   return (
     <label className={CheckboxStyle.toggle} style={color}>
       <input

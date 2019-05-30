@@ -1,14 +1,15 @@
-import React, { FunctionComponent, useRef, useEffect, useContext } from "react"
+import React, { FunctionComponent, useRef, useEffect, useContext, useCallback } from "react"
 import { TextContext, TextDispatchContext } from "../useTexts"
+
+const selectTextFromInput = e => e.target.select()
 
 type Text = FunctionComponent<{
   id: 0 | 1 | 2
   isOn: boolean
   isEditing: boolean
-  toggleEdit: () => void
+  toggleEditMode: () => void
 }>
-
-const Text: Text = ({ isOn, id, isEditing, toggleEdit }) => {
+const Text: Text = ({ isOn, id, isEditing, toggleEditMode }) => {
   const texts = useContext(TextContext)
   const updateText = useContext(TextDispatchContext)
   const correctFontWeight = { fontWeight: isOn ? 500 : 300 }
@@ -18,19 +19,22 @@ const Text: Text = ({ isOn, id, isEditing, toggleEdit }) => {
     inputRef.current && inputRef.current.focus && inputRef.current.focus()
   })
 
+  const onEnter = useCallback(e => e.key === "Enter" && toggleEditMode(), [toggleEditMode])
+  const onChange = useCallback(e => updateText({ id, data: e.target.value }), [id, updateText])
+
   return isEditing ? (
     <input
+      type="text"
       ref={inputRef}
       defaultValue={texts[id]}
-      onBlur={toggleEdit}
-      type="text"
-      onFocus={e => e.target.select()}
+      onBlur={toggleEditMode}
+      onFocus={selectTextFromInput}
       style={correctFontWeight}
-      onKeyDown={e => e.key === "Enter" && toggleEdit()}
-      onChange={e => updateText({ id, data: e.target.value })}
+      onKeyDown={onEnter}
+      onChange={onChange}
     />
   ) : (
-    <span style={correctFontWeight} onDoubleClick={toggleEdit}>
+    <span style={correctFontWeight} onDoubleClick={toggleEditMode}>
       {texts[id]}
     </span>
   )

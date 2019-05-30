@@ -14,8 +14,8 @@ const initialTexts = (() => {
 })()
 
 const useTexts = (): [texts, React.Dispatch<Action>] => {
-  const [texts, dispatch] = useReducer((state: texts, action: Action) => {
-    console.log({action})
+  const [texts, dispatch] = useReducer((oldState: texts, action: Action) => {
+    const state: texts = [oldState[0], oldState[1], oldState[2]]
     state[action.id] = action.data
     return state
   }, initialTexts)
