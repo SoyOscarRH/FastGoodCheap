@@ -21,7 +21,7 @@ const baseURL = "https://soyoscarrh.github.io/FastGoodCheap/?"
 const copyToClipboard = (notSafeTexts: Array<string>) => {
   const data = <span>Copied to clipboard</span>
   const texts = notSafeTexts.map(text => encodeURI(text))
-  console.log({texts})
+
   // @ts-ignore
   ToastsStore.info(data)
   const URL = baseURL + "t1=" + texts[0] + "&t2=" + texts[1] + "&t3=" + texts[2]
