@@ -25,7 +25,7 @@ const Option: Checkbox = ({ color, id }) => {
     <div className={OptionStyles.Container}>
       <span />
       <CostumeCheckbox color={color} checked={isOn} onChange={onClick} />
-      <Text id={id} toggleEditMode={toggleEditMode} isOn isEditing={isEditing} />
+      <Text id={id} toggleEditMode={toggleEditMode} isOn={isOn} isEditing={isEditing} />
       <span />
     </div>
   )

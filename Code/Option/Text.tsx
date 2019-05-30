@@ -34,7 +34,7 @@ const Text: Text = ({ isOn, id, isEditing, toggleEditMode }) => {
       onChange={onChange}
     />
   ) : (
-    <span style={correctFontWeight} onDoubleClick={toggleEditMode}>
+    <span title="Double click to edit" style={correctFontWeight} onDoubleClick={toggleEditMode}>
       {texts[id]}
     </span>
   )

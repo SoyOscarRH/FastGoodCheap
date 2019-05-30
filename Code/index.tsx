@@ -2,7 +2,7 @@ import React, { FunctionComponent, useCallback } from "react"
 import ReactDOM from "react-dom"
 
 import { ToastsContainer, ToastsStore, ToastsContainerPosition } from "react-toasts"
-import { copyToClipboard, copyToFB, copyToTwitter } from "./links"
+import { copyToClipboard, showRespect, showMe, copyToTwitter } from "./links"
 import Option from "./Option"
 
 import useJustTwoActive, { ActivesContext, ActivesDispatchContext } from "./useJustTwoActive"
@@ -15,7 +15,6 @@ const App: FunctionComponent = () => {
   const [texts, changeText] = useTexts()
 
   const toClip = useCallback(() => copyToClipboard(texts), [texts])
-  const toFB = useCallback(() => copyToFB(texts), [texts])
   const toTwitter = useCallback(() => copyToTwitter(texts), [texts])
 
   return (
@@ -31,9 +30,10 @@ const App: FunctionComponent = () => {
                 <Option id={2} color="#c72c41" />
                 <div />
                 <div className={Styles.Links}>
-                  <img src="Assets/clipboard.png" onClick={toClip} />
-                  <img src="Assets/facebook.png" onClick={toFB} />
-                  <img src="Assets/twitter.png" onClick={toTwitter} />
+                  <img title="Copy page to copyclip" src="Assets/clipboard.png" onClick={toClip} />
+                  <img title="Share it on Twitter" src="Assets/twitter.png" onClick={toTwitter} />
+                  <img title="Me" src="Assets/oscar.png" onClick={showMe} />
+                  <img title="Info on this page" src="Assets/info.png" onClick={showRespect} />
                 </div>
               </main>
               <ToastsContainer position={ToastsContainerPosition.BOTTOM_LEFT} store={ToastsStore} />

@@ -17,7 +17,6 @@ const copyTextToClipboard = (text: string) => {
 
 const baseURL = "https://soyoscarrh.github.io/FastGoodCheap/?"
 
-
 const copyToClipboard = (notSafeTexts: Array<string>) => {
   const data = <span>Copied to clipboard</span>
   const texts = notSafeTexts.map(text => encodeURI(text))
@@ -28,23 +27,44 @@ const copyToClipboard = (notSafeTexts: Array<string>) => {
   copyTextToClipboard(URL)
 }
 
-const copyToFB = (notSafeTexts: Array<string>) => {
-  const texts = notSafeTexts.map(text => encodeURI(text))
-
-  ToastsStore.info("Copied to clipboard")
-  const baseFBURL = "https://www.facebook.com/sharer/sharer.php?u=" + baseURL
-  const URL = baseFBURL + "t1=" + texts[0] + "%26t2=" + texts[1] + "%26t3=" + texts[2]
-  window.open(URL, "_blank")
-}
-
 const copyToTwitter = (notSafeTexts: Array<string>) => {
   const texts = notSafeTexts.map(text => encodeURI(text))
 
   ToastsStore.info("Copied to clipboard")
   const baseFBURL = "https://twitter.com/share?url=" + baseURL
-  const URL = baseFBURL + "t1=" + texts[0] + "%26t2=" + texts[1] + "%26t3=" + texts[2]
+  const URL =
+    baseFBURL + encodeURIComponent("t1=" + texts[0] + "&t2=" + texts[1] + "&t3=" + texts[2])
 
   window.open(URL, "_blank")
 }
 
-export { copyToClipboard, copyToFB, copyToTwitter }
+const showRespect = () => {
+  const CSS = (
+    <span
+      style={{ cursor: "pointer" }}
+      onClick={() => window.open("https://codepen.io/melnik909/pen/oewwBo?editors=1100", "_blank")}
+    >
+      original CSS Switch
+    </span>
+  )
+
+  const twitter = (
+    <span
+      style={{ cursor: "pointer" }}
+      onClick={() =>
+        window.open("https://twitter.com/missingcloudltd/status/826203153934729218", "_blank")
+      }
+    >
+      based in this tweet
+    </span>
+  )
+
+  // @ts-ignore
+  setTimeout( () => ToastsStore.info(CSS, 7000), 2000)
+  // @ts-ignore
+  ToastsStore.info(twitter, 7000)
+}
+
+const showMe = () => window.open("https://soyoscarrh.github.io/", "_blank")
+
+export { copyToClipboard, copyToTwitter, showMe, showRespect }

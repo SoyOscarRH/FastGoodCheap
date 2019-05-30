@@ -21,7 +21,7 @@ const useTexts = (): [texts, React.Dispatch<Action>] => {
   }, initialTexts)
 
   useEffect(() => {
-    document.title = texts.join(" ")
+    document.title = texts.join(" vs ")
   }, [texts])
 
   return [texts, dispatch]
