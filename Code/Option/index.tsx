@@ -7,7 +7,7 @@ import TextStyles from "./TextStyles.css"
 const Checkbox: FunctionComponent<{
   isOn: boolean
   default: string
-  color: "Green" | "Blue" | "Red",
+  color: "Green" | "Blue" | "Red"
   onClick: () => void
 }> = props => {
   const [text, setText] = useState(props.default)
@@ -32,7 +32,11 @@ const Checkbox: FunctionComponent<{
   )
 
   const showText = (
-    <span className={TextStyles.Text} onDoubleClick={toggleEdit}>
+    <span
+      className={TextStyles.Text}
+      style={{ fontWeight: props.isOn ? 400 : 300 }}
+      onDoubleClick={toggleEdit}
+    >
       {text}
     </span>
   )
