@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useRef } from "react"
 import ReactDOM from "react-dom"
 
 import Styles from "./Styles.css"
@@ -6,9 +6,15 @@ import Option from "./Option"
 
 const App: FunctionComponent = () => {
   const [state, setState] = useState([true, true, false])
-  const update = id => {
+  const lastOne = useRef(0)
+  const update = (id: 0 | 1 | 2) => {
     const newState = [...state]
     newState[id] = !newState[id]
+    if (newState.every(bit => bit)) {
+      newState[lastOne.current] = false;
+    }
+
+    lastOne.current = id;
     setState(newState)
   }
   

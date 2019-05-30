@@ -1,5 +1,5 @@
 .Text {
-    font-size: 7.5vw;
+    font-size: 7.5vmin;
     user-select: none;
     width: 100%;
     font-family: 'Raleway', sans-serif;
@@ -30,6 +30,12 @@
 @media only screen and (min-width: 800px) {
     .Container {
         grid-template-columns: 18% auto 1fr 18%;
+    } 
+}
+
+@media only screen and (min-width: 1200px) {
+    .Container {
+        grid-template-columns: 25% auto 1fr 25%;
     } 
 }
 

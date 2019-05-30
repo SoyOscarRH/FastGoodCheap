@@ -111,10 +111,33 @@
 
 .toggle {
     margin: 1rem;
-    --toggleSize: 22vw;
+    --toggleSize: 22vmin;
     --toggleTimeMove: 0.5s;
     --toggleBgColorActive: #009975;
 }
+
+
+@media only screen and (min-width: 600px) {
+    .toggle {
+        --toggleIndent: 12px;
+        --toggleBorderRadius: 70px;
+    } 
+}
+
+@media only screen and (min-width: 800px) {
+    .toggle {
+        --toggleIndent: 14px;
+        --toggleBorderRadius: 75px;
+    } 
+}
+
+@media only screen and (min-width: 1200px) {
+    .toggle {
+        --toggleIndent: 16px;
+        --toggleBorderRadius: 80px;
+    } 
+}
+
 
 .Green {
     --toggleBgColorActive: #009975;
