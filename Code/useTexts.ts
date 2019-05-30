@@ -1,45 +1,34 @@
-import { useReducer, useCallback } from "react"
+import React, { useReducer, useEffect } from "react"
 
-
-
-type index = 0 | 1 | 2
 type texts = [string, string, string]
-type voidFn = (data: string) => void
-interface Action {
-  id: index
-  data: string
+interface Action { id: 0 | 1 | 2, data: string}
+
+const initialTexts = (() => {
+  const URLparams = new URLSearchParams(window.location.search)
+  const text1 = URLparams.get("t1")
+  const text2 = URLparams.get("t2")
+  const text3 = URLparams.get("t3")
+
+  if (!!text1 && !!text2 && !!text3) return [text1, text2, text3] as texts
+  else return ["Good", "Fast", "Cheap"] as texts
+})()
+
+const useTexts = (): [texts, React.Dispatch<Action>] => {
+  const [texts, dispatch] = useReducer((state: texts, action: Action) => {
+    console.log({action})
+    state[action.id] = action.data
+    return state
+  }, initialTexts)
+
+  useEffect(() => {
+    document.title = texts.join(" ")
+  }, [texts])
+
+  return [texts, dispatch]
 }
-const getDefaultTexts = (): texts => {
-  let searchParams = new URLSearchParams(window.location.search)
-  const text1 = searchParams.get("text1")
-  const text2 = searchParams.get("text2")
-  const text3 = searchParams.get("text3")
 
-  console.log({text1, text2, text3})
-
-  if (!!text1 && !!text2 && !!text3) return [text1, text2, text3]
-  else return ["Good", "Fast", "Cheap"]
-}
-
-const initial: texts = getDefaultTexts()
-
-
-const useTexts = (): [texts, [voidFn, voidFn, voidFn]] => {
-  const [texts, dispatch] = useReducer((state: texts, action: Action): texts => {
-    const { id, data } = action
-    const newState: texts = [state[0], state[1], state[2]]
-    newState[id] = data
-    
-
-    document.title = newState.join(" ")
-    return newState
-  }, initial)
-
-  const fun1 = useCallback(data => dispatch({ id: 0, data }), [])
-  const fun2 = useCallback(data => dispatch({ id: 1, data }), [])
-  const fun3 = useCallback(data => dispatch({ id: 2, data }), [])
-
-  return [texts, [fun1, fun2, fun3]]
-}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const TextDispatchContext = React.createContext((_action: Action) => {})
+export const TextContext = React.createContext(initialTexts)
 
 export default useTexts

@@ -3,6 +3,6 @@
     width: 100%;
     display: grid;
     background-color:#F9F9F9;
-    grid-template-rows: 1fr auto auto auto 1fr;
-    grid-gap: 3rem;
+    grid-template-rows: 1fr auto auto auto 2fr;
+    grid-gap: 1.5rem;
 }

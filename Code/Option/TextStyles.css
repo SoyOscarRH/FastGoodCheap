@@ -1,17 +1,3 @@
-.Text {
-    font-size: 7.5vmin;
-    user-select: none;
-    width: 100%;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-}
-  
-.Input {
-    border-radius: 1rem;
-    border: 1px solid #ff0000;
-    -webkit-tap-highlight-color: transparent;
-}
-
 .Container {
     font-size: 3.5rem;
     display: grid;
@@ -19,6 +5,25 @@
     align-content: center;
     grid-gap: 0.8rem;
     align-items: center;
+}
+
+.Container input[type="text"] {
+    font-size: 7.5vmin;
+    user-select: none;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    outline: none;
+    border-radius: 1rem;
+    background-color: #F9F9F9;
+}
+
+.Container span {
+    font-size: 7.5vmin;
+    user-select: none;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
 }
 
 @media only screen and (min-width: 600px) {

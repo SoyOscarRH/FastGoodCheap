@@ -1,73 +1,64 @@
-import React, { FunctionComponent, useState, useRef, useEffect } from "react"
+import React, { FunctionComponent, useRef, useEffect, useContext } from "react"
 import useToggle from "../useToggle"
+import { TextContext, TextDispatchContext } from "../useTexts"
 
-import CheckboxStyle from "./CheckboxStyle.css"
+import CostumeCheckbox from "./CostumeCheckbox"
+
 import TextStyles from "./TextStyles.css"
 
-const Checkbox: FunctionComponent<{
+type Text = FunctionComponent<{
+  id: 0 | 1 | 2
   isOn: boolean
-  defaultText: string
-  color: "Green" | "Blue" | "Red"
-  onClick: () => void
-  onTextChange: (data: string) => void
-}> = ({ isOn, defaultText, color, onClick, onTextChange }) => {
-  const [text, setText] = useState(defaultText)
-  const [isEditable, toggleEdit] = useToggle(false)
-  const inputRef = useRef(null)
+  isEditing: boolean
+  toggleEdit: () => void
+}>
 
+const Text: Text = ({ isOn, id, isEditing, toggleEdit }) => {
+  const texts = useContext(TextContext)
+  const updateText = useContext(TextDispatchContext)
+  const correctFontWeight = { fontWeight: isOn ? 500 : 300 }
+
+  const inputRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    // @ts-ignore [Do not know why]
     inputRef.current && inputRef.current.focus && inputRef.current.focus()
   })
 
-  useEffect(() => {
-    onTextChange(text)
-  }, [onTextChange, text])
-
-  const CostumeCheckbox = (
-    <label className={CheckboxStyle.toggle + " " + CheckboxStyle[color]}>
-      <input
-        type="checkbox"
-        checked={isOn}
-        onChange={onClick}
-        className={CheckboxStyle.toggleInput}
-      />
-      <span className={CheckboxStyle.toggleLabel} />
-    </label>
-  )
-
-  const showText = (
-    <span
-      className={TextStyles.Text}
-      style={{ fontWeight: isOn ? 500 : 300 }}
-      onDoubleClick={toggleEdit}
-    >
-      {text}
-    </span>
-  )
-
-  const editText = (
+  return isEditing ? (
     <input
       ref={inputRef}
-      onFocus={e => e.target.select()}
-      className={TextStyles.Text + " " + TextStyles.Input}
-      value={text}
-      onKeyDown={e => e.key === "Enter" && toggleEdit()}
+      defaultValue={texts[id]}
       onBlur={toggleEdit}
-      onChange={e => {
-        setText(e.target.value)
-      }}
+      type="text"
+      onFocus={e => e.target.select()}
+      style={correctFontWeight}
+      onKeyDown={e => e.key === "Enter" && toggleEdit()}
+      onChange={e => updateText({ id, data: e.target.value })}
     />
+  ) : (
+    <span style={correctFontWeight} onDoubleClick={toggleEdit}>
+      {texts[id]}
+    </span>
   )
+}
+
+type Checkbox = FunctionComponent<{
+  id: 0 | 1 | 2
+  isOn: boolean
+  color: "Green" | "Blue" | "Red"
+  onClick: () => void
+}>
+
+const Option: Checkbox = ({ isOn, color, onClick, id }) => {
+  const [isEditing, toggleEdit] = useToggle(false)
 
   return (
     <div className={TextStyles.Container}>
       <span />
-      {CostumeCheckbox}
-      {isEditable ? editText : showText}
+      <CostumeCheckbox checked={isOn} onChange={onClick} />
+      <Text id={id} toggleEdit={toggleEdit} isOn isEditing={isEditing} />
       <span />
     </div>
   )
 }
 
-export default Checkbox
+export default Option
