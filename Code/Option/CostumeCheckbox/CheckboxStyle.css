@@ -116,7 +116,6 @@
     --toggleBgColorActive: #009975;
 }
 
-
 @media only screen and (min-width: 600px) {
     .toggle {
         --toggleIndent: 12px;
@@ -136,17 +135,4 @@
         --toggleIndent: 16px;
         --toggleBorderRadius: 80px;
     } 
-}
-
-
-.Green {
-    --toggleBgColorActive: #009975;
-}
-
-.Blue {
-    --toggleBgColorActive: #145374;
-}
-
-.Red {
-    --toggleBgColorActive: #c72c41;
 }
