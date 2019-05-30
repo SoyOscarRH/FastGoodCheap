@@ -1,10 +1,28 @@
-.container {
-    display: flex;
+.Text {
+    font-size: 3.5rem;
+    user-select: none;
+    width: 100%;
+}
+  
+
+.Container {
+    font-size: 3.5rem;
+    display: grid;
+    grid-template-columns: 8% auto 1fr 8%;
+    align-content: center;
+    grid-gap: 0.8rem;
     align-items: center;
 }
 
-.text {
-    text-align: center; 
-    font-size: 3.5rem;
+@media only screen and (min-width: 600px) {
+    .Container {
+        grid-template-columns: 12% auto 1fr 12%;
+    } 
 }
-  
+
+@media only screen and (min-width: 800px) {
+    .Container {
+        grid-template-columns: 18% auto 1fr 18%;
+    } 
+}
+

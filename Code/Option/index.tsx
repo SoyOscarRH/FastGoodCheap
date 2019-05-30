@@ -1,17 +1,19 @@
-import React, { FunctionComponent, useState } from "react"
+import React, { FunctionComponent, useState, useRef, useEffect } from "react"
 import useToggle from "../useToggle"
 
 import CheckboxStyle from "./CheckboxStyle.css"
 import TextStyles from "./TextStyles.css"
 
-import Styles from "../Styles.css"
-
-const Checkbox: FunctionComponent<{ isOn: boolean }> = props => {
-  const [text, setText] = useState("Fast")
+const Checkbox: FunctionComponent<{ isOn: boolean, default: string }> = props => {
+  const [text, setText] = useState(props.default)
   const [isEditable, toggleEdit] = useToggle(false)
   const [isOn, toggleOn] = useToggle(false)
+  const inputRef = useRef(null)
 
-  console.log(props)
+  useEffect(() => {
+    // @ts-ignore [Do not know why]
+    inputRef.current && inputRef.current.focus && inputRef.current.focus()
+  })
 
   const CostumeCheckbox = (
     <label className={CheckboxStyle.toggle}>
@@ -26,15 +28,18 @@ const Checkbox: FunctionComponent<{ isOn: boolean }> = props => {
   )
 
   const showText = (
-    <span className={TextStyles.text} onDoubleClick={toggleEdit}>
+    <span className={TextStyles.Text} onDoubleClick={toggleEdit}>
       {text}
     </span>
   )
 
   const editText = (
     <input
-      className={TextStyles.text}
+      ref={inputRef}
+      onFocus={e => e.target.select()}
+      className={TextStyles.Text}
       value={text}
+      onKeyDown={e => e.key === "Enter" && toggleEdit()}
       onBlur={toggleEdit}
       onChange={e => {
         setText(e.target.value)
@@ -43,11 +48,11 @@ const Checkbox: FunctionComponent<{ isOn: boolean }> = props => {
   )
 
   return (
-    <div className={TextStyles.container}>
+    <div className={TextStyles.Container}>
+      <span />
       {CostumeCheckbox}
       {isEditable ? editText : showText}
-      <br />
-      <br />
+      <span />
     </div>
   )
 }
