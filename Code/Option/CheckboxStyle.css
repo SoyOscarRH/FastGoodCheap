@@ -108,9 +108,22 @@
 /* ====================================================
 ===============     DEFAULT STYLE   ===================
 =====================================================*/
+
 .toggle {
     margin: 1rem;
-    --toggleSize: 8rem;
+    --toggleSize: 22vw;
     --toggleTimeMove: 0.5s;
-    --toggleBgColorActive: #10854e;
+    --toggleBgColorActive: #009975;
+}
+
+.Green {
+    --toggleBgColorActive: #009975;
+}
+
+.Blue {
+    --toggleBgColorActive: #145374;
+}
+
+.Red {
+    --toggleBgColorActive: #c72c41;
 }

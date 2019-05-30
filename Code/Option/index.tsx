@@ -4,10 +4,14 @@ import useToggle from "../useToggle"
 import CheckboxStyle from "./CheckboxStyle.css"
 import TextStyles from "./TextStyles.css"
 
-const Checkbox: FunctionComponent<{ isOn: boolean, default: string }> = props => {
+const Checkbox: FunctionComponent<{
+  isOn: boolean
+  default: string
+  color: "Green" | "Blue" | "Red",
+  onClick: () => void
+}> = props => {
   const [text, setText] = useState(props.default)
   const [isEditable, toggleEdit] = useToggle(false)
-  const [isOn, toggleOn] = useToggle(false)
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -16,11 +20,11 @@ const Checkbox: FunctionComponent<{ isOn: boolean, default: string }> = props =>
   })
 
   const CostumeCheckbox = (
-    <label className={CheckboxStyle.toggle}>
+    <label className={CheckboxStyle.toggle + " " + CheckboxStyle[props.color]}>
       <input
         type="checkbox"
-        checked={isOn}
-        onChange={toggleOn}
+        checked={props.isOn}
+        onChange={props.onClick}
         className={CheckboxStyle.toggleInput}
       />
       <span className={CheckboxStyle.toggleLabel} />
@@ -37,7 +41,7 @@ const Checkbox: FunctionComponent<{ isOn: boolean, default: string }> = props =>
     <input
       ref={inputRef}
       onFocus={e => e.target.select()}
-      className={TextStyles.Text}
+      className={TextStyles.Text + " " + TextStyles.Input}
       value={text}
       onKeyDown={e => e.key === "Enter" && toggleEdit()}
       onBlur={toggleEdit}

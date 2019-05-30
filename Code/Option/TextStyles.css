@@ -1,9 +1,16 @@
 .Text {
-    font-size: 3.5rem;
+    font-size: 7.5vw;
     user-select: none;
     width: 100%;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
 }
   
+.Input {
+    border-radius: 1rem;
+    border: 1px solid #ff0000;
+    -webkit-tap-highlight-color: transparent;
+}
 
 .Container {
     font-size: 3.5rem;
