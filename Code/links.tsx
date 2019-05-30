@@ -59,10 +59,23 @@ const showRespect = () => {
     </span>
   )
 
+  const code = (
+    <span
+      style={{ cursor: "pointer" }}
+      onClick={() =>
+        window.open("https://github.com/SoyOscarRH/FastGoodCheap", "_blank")
+      }
+    >
+      See the source code
+    </span>
+  )
+
   // @ts-ignore
-  setTimeout( () => ToastsStore.info(CSS, 7000), 2000)
+  setTimeout( () => ToastsStore.info(code, 10000), 2000)
   // @ts-ignore
-  ToastsStore.info(twitter, 7000)
+  setTimeout( () => ToastsStore.info(CSS, 12000), 6000)
+  // @ts-ignore
+  ToastsStore.info(twitter, 8000)
 }
 
 const showMe = () => window.open("https://soyoscarrh.github.io/", "_blank")
