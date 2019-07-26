@@ -1,0 +1,10 @@
+.Links {
+  margin: 2rem;
+  text-align: end;
+}
+
+.Links img {
+  height: 2.2rem;
+  margin-right: 2rem;
+  cursor: pointer;
+}

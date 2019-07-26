@@ -1,17 +1,17 @@
-import React, { FunctionComponent, useRef, useEffect, useContext, useCallback } from "react"
-import { TextContext, TextDispatchContext } from "../useTexts"
+import React, { FunctionComponent, useRef, useEffect, useCallback } from "react"
+import { useTexts, useChangeTexts } from "../Texts"
 
 const selectTextFromInput = e => e.target.select()
 
 type Text = FunctionComponent<{
-  id: 0 | 1 | 2
+  id: number
   isOn: boolean
   isEditing: boolean
   toggleEditMode: () => void
 }>
 const Text: Text = ({ isOn, id, isEditing, toggleEditMode }) => {
-  const texts = useContext(TextContext)
-  const updateText = useContext(TextDispatchContext)
+  const texts = useTexts()
+  const updateText = useChangeTexts()
   const correctFontWeight = { fontWeight: isOn ? 500 : 300 }
 
   const inputRef = useRef<HTMLInputElement>(null)

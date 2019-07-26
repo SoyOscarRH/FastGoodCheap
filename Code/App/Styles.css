@@ -1,0 +1,7 @@
+.Container {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    background-color:#F9F9F9;
+    grid-gap: 1.5rem;
+}
