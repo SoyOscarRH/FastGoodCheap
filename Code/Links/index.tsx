@@ -14,10 +14,12 @@ const Links: FunctionComponent = () => {
 
   return (
     <div className={Styles.Links}>
+      <span />
       <img title="Copy page to copyclip" src="Assets/clipboard.png" onClick={toClipboard} />
       <img title="Share it on Twitter" src="Assets/twitter.png" onClick={toTwitter} />
       <img title="Me" src="Assets/oscar.png" onClick={showMe} />
       <img title="Info on this page" src="Assets/info.png" onClick={showRespect} />
+
     </div>
   )
 }

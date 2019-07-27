@@ -1,6 +1,7 @@
 .Links {
   margin: 2rem;
-  text-align: end;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto;
 }
 
 .Links img {
@@ -9,12 +10,17 @@
   cursor: pointer;
 }
 
+.Button {
+  opacity: 0.1;
+}
+
 .Toast {
   padding: 1.2rem 1.6rem;
   margin-bottom: 5rem;
   font-size: 1.1rem;
   font-family: "Raleway";
   border-radius: 0.8rem;
+  user-select: none;
 }
 
 @media only screen and (min-width: 580px) {

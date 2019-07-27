@@ -1,17 +1,17 @@
 import React, { FunctionComponent, useRef, useEffect, useCallback } from "react"
-import { useTexts, useChangeTexts } from "../Texts"
 
-const selectTextFromInput = e => e.target.select()
+import useToggle from "../useToggle"
+
+const selectTextFromInput = (e: React.FocusEvent<HTMLInputElement>) => e.target.select()
 
 type Text = FunctionComponent<{
-  id: number
   isOn: boolean
-  isEditing: boolean
-  toggleEditMode: () => void
+  text: string
+  onChangeText: (data: string) => void
 }>
-const Text: Text = ({ isOn, id, isEditing, toggleEditMode }) => {
-  const texts = useTexts()
-  const updateText = useChangeTexts()
+const Text: Text = ({ isOn, text, onChangeText }) => {
+  const [isEditing, toggleEditMode] = useToggle(false)
+
   const correctFontWeight = { fontWeight: isOn ? 500 : 300 }
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -20,22 +20,21 @@ const Text: Text = ({ isOn, id, isEditing, toggleEditMode }) => {
   })
 
   const onEnter = useCallback(e => e.key === "Enter" && toggleEditMode(), [toggleEditMode])
-  const onChange = useCallback(e => updateText({ id, data: e.target.value }), [id, updateText])
 
   return isEditing ? (
     <input
       type="text"
       ref={inputRef}
-      defaultValue={texts[id]}
+      defaultValue={text}
       onBlur={toggleEditMode}
       onFocus={selectTextFromInput}
       style={correctFontWeight}
       onKeyDown={onEnter}
-      onChange={onChange}
+      onChange={e => onChangeText(e.target.value)}
     />
   ) : (
     <span title="Double click to edit" style={correctFontWeight} onDoubleClick={toggleEditMode}>
-      {texts[id]}
+      {text}
     </span>
   )
 }

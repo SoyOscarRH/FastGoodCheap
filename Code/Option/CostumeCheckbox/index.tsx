@@ -2,19 +2,18 @@ import React, { FunctionComponent, CSSProperties } from "react"
 
 import CheckboxStyle from "./CheckboxStyle.css"
 
-type CostumeCheckbox = FunctionComponent<{
+const CostumeCheckbox: FunctionComponent<{
   onChange: () => void
-  checked: boolean
+  isOn: boolean
   color: string
-}>
-const CostumeCheckbox: CostumeCheckbox = props => {
+}> = props => {
   // @ts-ignore
   const color: CSSProperties = { "--toggleBgColorActive": props.color }
   return (
     <label className={CheckboxStyle.toggle} style={color}>
       <input
         type="checkbox"
-        checked={props.checked}
+        checked={props.isOn}
         onChange={props.onChange}
         className={CheckboxStyle.toggleInput}
       />
