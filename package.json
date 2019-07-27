@@ -48,10 +48,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
-    "@material-ui/core": "^4.2.1",
-    "notistack": "^0.8.9",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-toasts": "^3.0.3"
+    "react-dom": "^16.8.6"
   }
 }
