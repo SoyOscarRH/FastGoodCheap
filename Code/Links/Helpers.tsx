@@ -6,7 +6,8 @@ const createLink = (normalText: Array<string>) => {
 
   const texts = normalText.map(text => encodeURIComponent(text))
   const link = texts.reduce((link, text, num) => link + `${num ? "&" : "?"}t${num + 1}=${text}`, "")
-  return baseURL + link
+  const num = (normalText.length != 3) ? `&num=${normalText.length}` : ""
+  return baseURL + link + num
 }
 
 const defaultValuesToast = {
