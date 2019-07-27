@@ -1,7 +1,5 @@
-import React, { FunctionComponent } from "react"
+import React, { FunctionComponent, useState, useEffect } from "react"
 import ReactDOM from "react-dom"
-
-import { ToastsContainer, ToastsStore, ToastsContainerPosition } from "react-toasts"
 
 import ActiveTextContainer from "../ActiveText"
 import Links from "../Links"
@@ -11,37 +9,42 @@ import useCreateTexts, { TextsContext, ChangeTextsContext } from "../Texts"
 
 import Styles from "./Styles.css"
 
-
 const Space = () => <div />
 const colors = ["#009975", "#145374", "#c72c41"]
 
 const numOptions = (() => {
   const URLparams = new URLSearchParams(window.location.search)
   const numOption = URLparams.get("num")
-
   return Number(numOption) || 3
 })()
 
 const defaultTexts = (() => {
   const defaults = ["Good", "Fast", "Cheap"]
-
-  return defaults.concat([])
+  const missing = Math.max(0, numOptions - 3)
+  return defaults.concat(Array(missing).fill("?"))
 })()
 
 const App: FunctionComponent = () => {
-
   const [texts, changeText] = useCreateTexts(defaultTexts.slice(0, numOptions))
-  const rowsStyle = { gridTemplateRows: `1fr ${"auto ".repeat(numOptions)} 2fr auto` }
-  const IDs = [...Array(numOptions).keys()]
+  const [isVisible, setVisible] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 40)
+  }, [])
+
+  const style = {
+    gridTemplateRows: `1fr ${"auto ".repeat(numOptions)} 2fr auto`,
+    visibility: isVisible ? "initial" : ("hidden" as "initial" | "hidden"),
+  }
 
   return (
     <>
       <TextsContext.Provider value={texts}>
-        <main className={Styles.Container} style={rowsStyle}>
+        <main className={Styles.Container} style={style}>
           <ChangeTextsContext.Provider value={changeText}>
             <ActiveTextContainer numOption={numOptions}>
               <Space />
-              {IDs.map(id => (
+              {[...Array(numOptions).keys()].map(id => (
                 <Option key={id} id={id} color={colors[id % colors.length]} />
               ))}
               <Space />
@@ -51,8 +54,6 @@ const App: FunctionComponent = () => {
           <Links />
         </main>
       </TextsContext.Provider>
-
-      <ToastsContainer position={ToastsContainerPosition.BOTTOM_LEFT} store={ToastsStore} />
     </>
   )
 }

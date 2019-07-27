@@ -8,3 +8,17 @@
   margin-right: 2rem;
   cursor: pointer;
 }
+
+.Toast {
+  padding: 1.2rem 1.6rem;
+  margin-bottom: 5rem;
+  font-size: 1.1rem;
+  font-family: "Raleway";
+  border-radius: 0.8rem;
+}
+
+@media only screen and (min-width: 580px) {
+  .Toast {
+    margin-bottom: 1rem;
+  }
+}

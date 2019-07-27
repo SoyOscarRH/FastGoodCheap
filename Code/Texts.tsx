@@ -7,16 +7,11 @@ interface Action {
 
 const getTexts = (initials: Array<string>) => {
   const URLparams = new URLSearchParams(window.location.search)
-  const texts = [] as Array<string>
 
-  let num = 1
-  let text = URLparams.get("t" + num)
-  while (text && texts.length < initials.length) {
-    texts.push(text)
-    text = URLparams.get("t" + ++num)
-  }
-
-  return texts.length ? texts : initials
+  return initials.map((defaultValue, index) => {
+    const text = URLparams.get(`t${index + 1}`)
+    return text || defaultValue
+  })
 }
 
 const useCreateTexts = (initials: Array<string>) => {

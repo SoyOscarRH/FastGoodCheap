@@ -6,7 +6,7 @@ import Text from "./Text"
 import useToggle from "../useToggle"
 import { useActives, useChangeActives } from "../ActiveText"
 
-import OptionStyles from "./OptionStyles.css"
+import OptionStyles from "./Styles.css"
 
 type Checkbox = FunctionComponent<{
   id: number

@@ -1,7 +1,5 @@
-import React from "react"
-import { renderToStaticMarkup } from "react-dom/server"
-
-import { ToastsStore } from "react-toasts"
+import Toastify from "./Toastify"
+import Styles from "./Styles.css"
 
 const createLink = (normalText: Array<string>) => {
   const baseURL = "https://soyoscarrh.github.io/FastGoodCheap/"
@@ -9,6 +7,15 @@ const createLink = (normalText: Array<string>) => {
   const texts = normalText.map(text => encodeURIComponent(text))
   const link = texts.reduce((link, text, num) => link + `${num ? "&" : "?"}t${num + 1}=${text}`, "")
   return baseURL + link
+}
+
+const defaultValuesToast = {
+  duration: 8000,
+  gravity: "bottom",
+  position: "left",
+  backgroundColor: "#0f3443",
+  className: Styles.Toast,
+  stopOnFocus: true,
 }
 
 const copyToClipboard = (link: string) => {
@@ -23,31 +30,25 @@ const copyToClipboard = (link: string) => {
   document.body.removeChild(textArea)
   scroll(0, actualScroll)
 
-  ToastsStore.info("Copied to clipboard")
+  Toastify({ ...defaultValuesToast, text: "Copied to clipboard" }).showToast()
 }
 
 const showRespect = () => {
-  const Toast: TimerHandler = (link: string, text: string, duration: number = 10000) => {
-    const element = renderToStaticMarkup(
-      <span style={{ cursor: "pointer" }} onClick={() => window.open(link, "_blank")}>
-        {text}
-      </span>
-    )
-
-    ToastsStore.info(element, duration)
+  const Toast: TimerHandler = (destination: string, text: string, duration: number = 80000) => {
+    Toastify({ ...defaultValuesToast, text, duration, destination, newWindow: true }).showToast()
   }
 
   const twitterLink = "https://twitter.com/missingcloudltd/status/826203153934729218"
   const twitterText = "Based in this tweet"
-  setTimeout(Toast(twitterLink, twitterText), 0)
+  setTimeout(() => Toast(twitterLink, twitterText), 0)
 
   const codeLink = "https://github.com/SoyOscarRH/FastGoodCheap"
   const codeText = "See the source code"
-  setTimeout(Toast(codeLink, codeText), 3000)
+  setTimeout(() => Toast(codeLink, codeText), 3000)
 
   const cssLink = "https://codepen.io/melnik909/pen/oewwBo?editors=1100"
   const cssText = "Original CSS Switch"
-  setTimeout(Toast(cssLink, cssText), 6000)
+  setTimeout(() => Toast(cssLink, cssText), 6000)
 }
 
 const open = (URL: string) => window.open(URL, "_blank")
