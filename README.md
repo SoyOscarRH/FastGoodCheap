@@ -2,5 +2,11 @@
 A simple webapp to show the tradeoffs in life
 
 Click the image:
-[![Alt text](Assets/Example1.png)](https://soyoscarrh.github.io/FastGoodCheap/)
-[![Alt text](Assets/Example2.png)](https://soyoscarrh.github.io/FastGoodCheap/)
+
+
+<a href="https://soyoscarrh.github.io/FastGoodCheap/">
+  <img src="Assets/Example1.png" width="40%">
+  <br/>
+  <img src="Assets/Example2.png" width="40%">
+  <br/>
+</a>
